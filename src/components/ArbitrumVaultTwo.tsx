@@ -126,7 +126,7 @@ const ArbitrumVaultTwo = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="text-primary" />
-              Arbitrum Vault {vaultData.address?.substring(0, 5)} ({vaultData.symbol})
+              Arbitrum Vault ({vaultData.symbol})
             </CardTitle>
             <CardDescription>
               Real-time vault statistics and performance
