@@ -42,7 +42,7 @@ const ContactSection = () => {
             Get In Touch
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to build the next generation of DeFi protocols? 
+            Ready to build the next generation of DeFi protocols?
             Let's discuss your project and explore possibilities.
           </p>
         </motion.div>
@@ -59,8 +59,8 @@ const ContactSection = () => {
             <div>
               <h3 className="text-2xl font-bold text-primary mb-4">Let's Connect</h3>
               <p className="text-muted-foreground mb-8">
-                Whether you're looking to build a new DeFi protocol, need smart contract 
-                auditing, or want to discuss blockchain architecture, I'm here to help 
+                Whether you're looking to build a new DeFi protocol, need smart contract
+                auditing, or want to discuss blockchain architecture, I'm here to help
                 turn your vision into reality.
               </p>
             </div>
@@ -181,7 +181,7 @@ const ContactSection = () => {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Footer */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -191,7 +191,7 @@ const ContactSection = () => {
         className="text-center mt-20 pt-8 border-t border-border"
       >
         <p className="text-muted-foreground text-sm">
-          © 2024 DeFi Developer Portfolio. Built with React, TypeScript, and Concrete SDK.
+          © 2025 DeFi Developer Portfolio. Built with React, TypeScript, and Concrete SDK.
         </p>
       </motion.div>
     </section>
