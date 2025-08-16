@@ -21,15 +21,15 @@ interface VaultData {
   error: string | null;
 }
 
-const ArbitrumVault = () => {
+const ArbitrumVaultTwo = () => {
   const [vaultData, setVaultData] = useState<VaultData>({
     name: "Concrete Yield Vault",
-    address: "0x62dDf301B21970e7Cc12c34cAAc9CE9bC975c0a9",
+    address: "0xE2d8267D285a7ae1eDf48498fF044241d04e9608",
     tvl: "Loading...",
     apy: "Loading...",
     userBalance: "0.00",
     chain: 'Arbitrum',
-    symbol: 'autoUSDai',
+    symbol: 'autoSUSDai',
     loading: true,
     error: null
   });
@@ -126,7 +126,7 @@ const ArbitrumVault = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="text-primary" />
-              Arbitrum Vault ({vaultData.symbol})
+              Arbitrum Vault {vaultData.address?.substring(0, 5)} ({vaultData.symbol})
             </CardTitle>
             <CardDescription>
               Real-time vault statistics and performance
@@ -232,4 +232,4 @@ const ArbitrumVault = () => {
   );
 };
 
-export default ArbitrumVault;
+export default ArbitrumVaultTwo;

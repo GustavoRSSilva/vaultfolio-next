@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import BeraVault from "./BeraVault";
-import ArbitrumVault from "./ArbitrumVault";
+import ArbitrumVaultOne from "./ArbitrumVaultOne";
+import ArbitrumVaultTwo from "./ArbitrumVaultTwo";
 
 const VaultSection = () => {
 
@@ -21,7 +22,8 @@ const VaultSection = () => {
             Automated yield strategies powered by Concrete's universal yield infrastructure
           </p>
         </motion.div>
-        <ArbitrumVault />
+        <ArbitrumVaultOne />
+        <ArbitrumVaultTwo />
         <div className="my-10" />
         <BeraVault />
       </div>

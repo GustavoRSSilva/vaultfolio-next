@@ -21,20 +21,20 @@ interface VaultData {
   error: string | null;
 }
 
-const BeraVault = () => {
+const ArbitrumVaultOne = () => {
   const [vaultData, setVaultData] = useState<VaultData>({
     name: "Concrete Yield Vault",
-    address: "0x49BEE393825BBAC404fEfE6E24f34854f30905D2",
+    address: "0x62dDf301B21970e7Cc12c34cAAc9CE9bC975c0a9",
     tvl: "Loading...",
     apy: "Loading...",
     userBalance: "0.00",
-    chain: 'Berachain',
-    symbol: 'BeraETH',
+    chain: 'Arbitrum',
+    symbol: 'autoUSDai',
     loading: true,
     error: null
   });
 
-  const provider = new ethers.JsonRpcProvider("https://berachain-mainnet.g.alchemy.com/v2/hKsHlE50q-74yQcnkB8zC");
+  const provider = new ethers.JsonRpcProvider("https://arb-mainnet.g.alchemy.com/v2/hKsHlE50q-74yQcnkB8zC");
 
   // Create vault instance
   const vault = getVault(
@@ -61,7 +61,7 @@ const BeraVault = () => {
         setVaultData(prev => ({
           ...prev,
           tvl: `${totalAssetsDisplay} ${vaultDetails.symbolDetails.underlyingSymbol}`,
-          apy: "3.82%",
+          apy: "10%",
           loading: false,
           error: null
         }));
@@ -83,6 +83,7 @@ const BeraVault = () => {
       const ethereum = (window as any).ethereum;
       if (ethereum) {
         const vaultDetails = await vault.getVaultDetails();
+        console.log('vaultDetails', vaultDetails);
 
         // current address
         const currentAddress = (await ethereum.request({ method: 'eth_requestAccounts' }))[0];
@@ -125,7 +126,7 @@ const BeraVault = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="text-primary" />
-              Berachain Vault {vaultData.address?.substring(0, 5)} ({vaultData.symbol})
+              Arbitrum Vault {vaultData.address?.substring(0, 5)} ({vaultData.symbol})
             </CardTitle>
             <CardDescription>
               Real-time vault statistics and performance
@@ -148,7 +149,7 @@ const BeraVault = () => {
             <div className="p-4 bg-secondary/30 rounded-lg">
               <p className="text-sm text-muted-foreground mb-1">Vault Address</p>
               <Badge variant="outline" className="font-mono text-xs">
-                <a href={`https://berascan.com/address/${vaultData.address}`} target="_blank" rel="noopener noreferrer">{vaultData.address}</a>
+                <a href={`https://arbiscan.io/address/${vaultData.address}`} target="_blank" rel="noopener noreferrer">{vaultData.address}</a>
               </Badge>
             </div>
 
@@ -231,4 +232,4 @@ const BeraVault = () => {
   );
 };
 
-export default BeraVault;
+export default ArbitrumVaultOne;
