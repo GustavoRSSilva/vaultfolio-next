@@ -94,7 +94,7 @@ const VaultSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
-            Concrete Vault
+            Concrete Vault SDK
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Automated yield strategies powered by Concrete's universal yield infrastructure
