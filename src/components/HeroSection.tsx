@@ -65,6 +65,9 @@ const HeroSection = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
+            <div className="text-8xl md:text-9xl font-black mb-4 bg-gradient-primary bg-clip-text text-transparent">
+              Hi
+            </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
               DeFi Developer
             </h1>
