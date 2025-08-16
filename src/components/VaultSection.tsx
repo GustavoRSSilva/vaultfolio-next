@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { TrendingUp, DollarSign, Wallet, AlertCircle } from "lucide-react";
 import { getVault } from "@concrete-xyz/sdk";
 import { ethers } from "ethers";
+import erc20Abi from "@/assets/erc20-abi.json";
 
 interface VaultData {
   name: string;
@@ -14,6 +15,8 @@ interface VaultData {
   tvl: string;
   apy: string;
   userBalance: string;
+  chain: string;
+  symbol: string;
   loading: boolean;
   error: string | null;
 }
@@ -21,13 +24,24 @@ interface VaultData {
 const VaultSection = () => {
   const [vaultData, setVaultData] = useState<VaultData>({
     name: "Concrete Yield Vault",
-    address: "0x15cE9bE6609db102b70D68ca75a39c555bEa5Fac",
+    address: "0x49BEE393825BBAC404fEfE6E24f34854f30905D2",
     tvl: "Loading...",
     apy: "Loading...",
     userBalance: "0.00",
+    chain: 'Berachain',
+    symbol: 'BeraETH',
     loading: true,
     error: null
   });
+
+  const provider = new ethers.JsonRpcProvider("https://berachain-mainnet.g.alchemy.com/v2/hKsHlE50q-74yQcnkB8zC");
+
+  // Create vault instance
+  const vault = getVault(
+    vaultData.address, // vault address
+    vaultData.chain, // network name
+    provider // ContractRunner instance
+  );
 
   const [depositAmount, setDepositAmount] = useState("");
   const [isConnected, setIsConnected] = useState(false);
@@ -37,18 +51,22 @@ const VaultSection = () => {
     // Simulate loading vault data
     const loadVaultData = async () => {
       try {
+        // Get vault details
+        const vaultDetails = await vault.getVaultDetails();
+        const totalAssetsDisplay = parseFloat(vaultDetails.deposits.deposited).toFixed(3);
+
         // For demo purposes, we'll use mock data
         // In a real app, you'd connect to Concrete SDK here
-        setTimeout(() => {
-          setVaultData(prev => ({
-            ...prev,
-            tvl: "$2,450,000",
-            apy: "12.5%", 
-            loading: false,
-            error: null
-          }));
-        }, 2000);
+
+        setVaultData(prev => ({
+          ...prev,
+          tvl: `${totalAssetsDisplay} ${vaultDetails.symbolDetails.underlyingSymbol}`,
+          apy: "3.82%",
+          loading: false,
+          error: null
+        }));
       } catch (error) {
+        console.error('Failed to load vault data:', error);
         setVaultData(prev => ({
           ...prev,
           loading: false,
@@ -64,9 +82,19 @@ const VaultSection = () => {
     try {
       const ethereum = (window as any).ethereum;
       if (ethereum) {
+        const vaultDetails = await vault.getVaultDetails();
+        console.log('vaultDetails', vaultDetails);
+
+        // current address
+        const currentAddress = (await ethereum.request({ method: 'eth_requestAccounts' }))[0];
+        const contractAddress = vaultDetails.underlaying.address;
+        const contract = new ethers.Contract(contractAddress, erc20Abi, provider);
+        const balance = await contract.balanceOf(currentAddress);
+        const balanceDisplay = parseFloat(ethers.formatUnits(balance, vaultDetails.symbolDetails.decimals)).toFixed(3);
+
         await ethereum.request({ method: 'eth_requestAccounts' });
         setIsConnected(true);
-        setVaultData(prev => ({ ...prev, userBalance: "1.25" }));
+        setVaultData(prev => ({ ...prev, userBalance: balanceDisplay }));
       } else {
         alert('Please install MetaMask!');
       }
@@ -79,7 +107,7 @@ const VaultSection = () => {
     // In a real app, this would interact with the Concrete SDK
     console.log('Depositing:', depositAmount);
     // Demo success
-    alert(`Successfully deposited ${depositAmount} ETH to the vault!`);
+    alert(`Successfully deposited ${depositAmount} ${vaultData.symbol} to the vault!`);
     setDepositAmount("");
   };
 
@@ -136,7 +164,7 @@ const VaultSection = () => {
                 <div className="p-4 bg-secondary/30 rounded-lg">
                   <p className="text-sm text-muted-foreground mb-1">Vault Address</p>
                   <Badge variant="outline" className="font-mono text-xs">
-                    {vaultData.address}
+                    <a href={`https://berascan.com/address/${vaultData.address}`} target="_blank" rel="noopener noreferrer">{vaultData.address}</a>
                   </Badge>
                 </div>
 
@@ -179,13 +207,13 @@ const VaultSection = () => {
                   <>
                     <div className="p-4 bg-secondary/30 rounded-lg">
                       <p className="text-sm text-muted-foreground mb-1">Your Balance</p>
-                      <p className="text-xl font-bold text-primary">{vaultData.userBalance} ETH</p>
+                      <p className="text-xl font-bold text-primary">{vaultData.userBalance} {vaultData.symbol}</p>
                     </div>
 
                     <div className="space-y-4">
                       <div>
                         <label className="text-sm text-muted-foreground mb-2 block">
-                          Deposit Amount (ETH)
+                          Deposit Amount ({vaultData.symbol})
                         </label>
                         <Input
                           type="number"
@@ -195,7 +223,7 @@ const VaultSection = () => {
                           className="bg-secondary/50"
                         />
                       </div>
-                      
+
                       <div className="grid grid-cols-2 gap-3">
                         <Button variant="vault" onClick={handleDeposit} disabled={!depositAmount}>
                           Deposit
