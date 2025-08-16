@@ -141,7 +141,7 @@ const VaultSection = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="text-primary" />
-                  Vault Overview
+                  Berachain Vault (beraETH)
                 </CardTitle>
                 <CardDescription>
                   Real-time vault statistics and performance
