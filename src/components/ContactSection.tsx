@@ -8,9 +8,9 @@ import { useState } from "react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    name: "ConcreteXYZ",
-    email: "hello@concretexyz.com",
-    message: "I'm interested in your services"
+    name: "John Doe",
+    email: "john.doe@example.com",
+    message: "I'm interested in creating a new vault"
   });
 
   const handleSubmit = (e: React.FormEvent) => {
