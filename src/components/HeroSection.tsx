@@ -47,7 +47,7 @@ const HeroSection = () => {
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "bounce" }}
+            transition={{ duration: 0.8, ease: "backOut" }}
             className="mb-8"
           >
             <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-primary/30 shadow-glow">
