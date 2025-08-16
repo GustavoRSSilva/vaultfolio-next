@@ -8,9 +8,9 @@ import { useState } from "react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
+    name: "ConcreteXYZ",
+    email: "hello@concretexyz.com",
+    message: "I'm interested in your services"
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -88,7 +88,7 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold">Twitter</h4>
-                      <p className="text-muted-foreground text-sm">@defibuilder</p>
+                      <p className="text-muted-foreground text-sm">@ConcreteXYZ</p>
                     </div>
                   </div>
                 </CardContent>
