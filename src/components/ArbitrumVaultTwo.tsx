@@ -54,6 +54,7 @@ const ArbitrumVaultTwo = () => {
         // Get vault details
         const vaultDetails = await vault.getVaultDetails();
         const totalAssetsDisplay = parseFloat(vaultDetails.deposits.deposited).toFixed(3);
+        console.log(`vaultDetails ${vaultDetails.symbolDetails.underlyingSymbol}`, vaultDetails);
 
         // For demo purposes, we'll use mock data
         // In a real app, you'd connect to Concrete SDK here
@@ -83,7 +84,6 @@ const ArbitrumVaultTwo = () => {
       const ethereum = (window as any).ethereum;
       if (ethereum) {
         const vaultDetails = await vault.getVaultDetails();
-        console.log('vaultDetails', vaultDetails);
 
         // current address
         const currentAddress = (await ethereum.request({ method: 'eth_requestAccounts' }))[0];

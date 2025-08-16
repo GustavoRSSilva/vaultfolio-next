@@ -53,6 +53,7 @@ const ArbitrumVaultOne = () => {
       try {
         // Get vault details
         const vaultDetails = await vault.getVaultDetails();
+        console.log(`vaultDetails ${vaultDetails.symbolDetails.underlyingSymbol}`, vaultDetails);
         const totalAssetsDisplay = parseFloat(vaultDetails.deposits.deposited).toFixed(3);
 
         // For demo purposes, we'll use mock data
@@ -83,7 +84,6 @@ const ArbitrumVaultOne = () => {
       const ethereum = (window as any).ethereum;
       if (ethereum) {
         const vaultDetails = await vault.getVaultDetails();
-        console.log('vaultDetails', vaultDetails);
 
         // current address
         const currentAddress = (await ethereum.request({ method: 'eth_requestAccounts' }))[0];
