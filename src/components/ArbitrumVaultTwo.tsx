@@ -112,8 +112,6 @@ const ArbitrumVaultTwo = () => {
   };
 
   return (
-
-
     <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
       {/* Vault Stats */}
       <motion.div
